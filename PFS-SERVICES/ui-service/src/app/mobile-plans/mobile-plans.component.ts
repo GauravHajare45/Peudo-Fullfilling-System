@@ -14,13 +14,16 @@ export class MobilePlansComponent implements OnInit{
   allPlans: any[] = [];
   planId: number = 0;
   token: string = '';
+  category: string = '';
+  searchResults: any[] = [];
+  searchTerm: string = '';
+  combinedPlans: any[] = [];
 
   constructor(private mobilePlanService: MobilePlanService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.token = this.authService.getToken() || ''; 
     console.log(this.token + "jhjhjh");
-    
     this.getAllPlans();
   }
 
@@ -30,21 +33,38 @@ export class MobilePlansComponent implements OnInit{
     });
   }
 
-  getCategoryPlans(categoryId: string) {
-    if (categoryId) { 
-      console.log(categoryId);
-      
-      this.mobilePlanService.getCategoryPlans(categoryId).subscribe((response: any) => {
-        this.categoryPlans = response;
-      });
-    }
-  }
-
   selectPlan(planId: number) {
     this.mobilePlanService.selectMobilePlan(planId).subscribe((response: any) => {
       console.log("selected");
       
     });
   }
+
+setSelectedCategory(category: string) {
+  this.category = category;
+  this.searchPlans();
+}
+
+getCategoryPlans(categoryId: string) {
+  if (categoryId) {
+    this.setSelectedCategory(categoryId);
+    this.mobilePlanService.getCategoryPlans(categoryId).subscribe((response: any) => {
+      this.combinedPlans = response;
+      this.categoryPlans = response;
+    });
+  }
+}
+
+searchPlans(): void {
+  if (this.searchTerm && this.searchTerm.trim() !== '') {
+    this.mobilePlanService.searchPlans(this.searchTerm, this.category).subscribe((response: any) => {
+      this.combinedPlans = response.filter((plan: any) => plan.category === this.category);
+    });
+  } else {
+    this.combinedPlans = this.categoryPlans;
+  }
+}
+
+  
 
 }

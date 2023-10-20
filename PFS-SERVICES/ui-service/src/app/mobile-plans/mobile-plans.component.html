@@ -1,19 +1,17 @@
-<h2>All Plans</h2>
-<ul>
-  <li *ngFor="let plan of allPlans" (click)="selectPlan(plan.planId)">
-    {{ plan.planId }} - {{ plan.pricing }}
-  </li>
-</ul>
+<div>
+  <input type="text" placeholder="Search plans" [(ngModel)]="searchTerm" (input)="searchPlans()">
 
-<h2 *ngIf="categoryPlans">Category Plans</h2>
-<ul *ngIf="categoryPlans">
-  <li *ngFor="let plan of categoryPlans" (click)="selectPlan(plan.planId)">
-    {{ plan.planId }} - {{ plan.category }}
-  </li>
-</ul>
+  <h2>Select Category</h2>
+  <button *ngFor="let category of ['Data', 'All', 'Pricing', 'Validity', 'Offers']" (click)="getCategoryPlans(category)">
+    Fetch {{ category }} Plans
+  </button>
 
-<h2>Select Category</h2>
-<button *ngFor="let category of ['Data', 'All', 'Pricing', 'Validity', 'Offers']"
-        (click)="getCategoryPlans(category)">
-  Fetch {{ category }} Plans
-</button>
+  <div *ngIf="combinedPlans.length > 0">
+    <h3>Plans</h3>
+    <ul>
+      <li *ngFor="let plan of combinedPlans">
+        Plan Name: {{ plan.planId }}
+      </li>
+    </ul>
+  </div>
+</div>

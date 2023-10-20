@@ -26,6 +26,14 @@ export class MobilePlanService {
     return this.httpClient.post(`${this.planApiUrl}/selectPlan`, requestBody);
   }
 
+  searchPlans(searchTerm: string, category: string): Observable<any>{
+    const requestBody = {
+      searchTerm: searchTerm,
+      category: category
+    }
+    return this.httpClient.post(`${this.planApiUrl}/searchPlans`, requestBody);
+  }
+
 }
 
 
