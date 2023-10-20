@@ -19,7 +19,6 @@ import com.pfs.planmanagementservice.Repository.MobilePlanRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.ws.rs.BadRequestException;
-import jakarta.ws.rs.InternalServerErrorException;
 import jakarta.ws.rs.NotFoundException;
 
 @Service
@@ -68,7 +67,7 @@ public class MobilePlanService {
     }
 
     public List<MobilePlanDTO> selectPlans(PlanIdDTO planIdDTO, String token) {
-        try {
+
             ResponseEntity<String> phoneNumberResponse = userDetailClient.getUserNumber(token);
             UserDTO userDTO = new UserDTO();
     
@@ -83,10 +82,6 @@ public class MobilePlanService {
                 String errorMessage = "Failed to fetch the user's phone number";
                 throw new BadRequestException(errorMessage);
             }
-        } catch (Exception e) {
-            String errorMessage = "An error occurred while selecting the plan";
-            throw new InternalServerErrorException(errorMessage, e);
-        }
     }
     
 

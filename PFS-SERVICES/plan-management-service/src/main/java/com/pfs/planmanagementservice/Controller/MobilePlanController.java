@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ import com.pfs.planmanagementservice.Entity.MobilePlan;
 import com.pfs.planmanagementservice.Service.MobilePlanService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/plans")
 public class MobilePlanController {
     @Autowired
@@ -38,6 +40,7 @@ public class MobilePlanController {
 
     @PostMapping("/selectPlan")
     public ResponseEntity<Object> selectMobilePlan(@RequestBody PlanIdDTO planIdDTO, @RequestHeader("Authorization") String token) {
+        System.out.println(token);
         List<MobilePlanDTO> selectedPlans = mobilePlanService.selectPlans(planIdDTO, token);
         return ResponseEntity.ok(selectedPlans);
     }

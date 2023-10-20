@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,7 +57,8 @@ public class AuthenticationController {
     
             boolean isValid = isValidResponse.getBody();
             boolean doesExist = doesExistResponse.getBody();
-    
+            System.out.println("hello world");
+            System.out.println("testng");
             if (isValid && doesExist) {
                 String otp = otpService.generateOtp(phoneNo);
                 responseDTO.setOtp(otp);
