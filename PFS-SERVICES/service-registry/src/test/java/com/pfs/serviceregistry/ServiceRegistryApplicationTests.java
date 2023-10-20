@@ -1,4 +1,4 @@
-package com.pfs.registry.serviceregistry;
+package com.pfs.serviceregistry;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
