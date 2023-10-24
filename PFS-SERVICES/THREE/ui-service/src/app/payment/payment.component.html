@@ -1,0 +1,28 @@
+<div class="payment-container">
+  <h2>Make Payment</h2>
+  
+  <div class="recharge-amount">
+    <label for="amount">Recharge Amount:</label>
+    <input type="number" [(ngModel)]="rechargeAmount" id="amount" name="amount">
+  </div>
+  
+  <div class="selected-plan">
+    <h3>Selected Mobile Plan:</h3>
+    <p><strong>Pricing:</strong> {{ paymentRequestDTO.mobilePlanDTO.pricing }}</p>
+    <p><strong>Validity:</strong> {{ paymentRequestDTO.mobilePlanDTO.validity }}</p>
+    <p><strong>Data Limit:</strong> {{ paymentRequestDTO.mobilePlanDTO.dataLimit }}</p>
+    <p><strong>Talk Time:</strong> {{ paymentRequestDTO.mobilePlanDTO.talkTime }}</p>
+    <p><strong>Category:</strong> {{ paymentRequestDTO.mobilePlanDTO.category }}</p>
+    <p><strong>Offers:</strong> {{ paymentRequestDTO.mobilePlanDTO.offers }}</p>
+  </div>
+  
+  <div class="mobile-number">
+    <p><strong>SIM Card Number:</strong> {{ paymentRequestDTO.mobileNumberDTO.simCardNumber }}</p>
+  </div>
+  
+  <div class="payment-status">
+    <p><strong>Status Success:</strong> {{ paymentRequestDTO.paymentResponseDTO.success ? 'Yes' : 'No' }}</p>
+  </div>
+  
+  <button (click)="makePayment()">Make Payment</button>
+</div>

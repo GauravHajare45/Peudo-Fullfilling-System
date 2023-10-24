@@ -1,0 +1,15 @@
+package com.pfs.simcardservice;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+
+@SpringBootApplication
+@EnableDiscoveryClient
+public class SimcardServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SimcardServiceApplication.class, args);
+	}
+
+}
