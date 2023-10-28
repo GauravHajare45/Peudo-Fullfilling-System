@@ -1,237 +1,166 @@
-## Pseudo Fulfillment System 
-- Author- Gaurav Hajare<br>
+# Pseudo Fulfillment System
 
-### Table of Contents
-1. Introduction<br>
-   1.1 Purpose<br>
-   1.2 Scope<br>
-   1.3 Document Conventions<br>
-   1.4 Intended Audience<br>
-   1.5 System Overview<br>
+## CheckList
 
-2. Functional Requirements<br>
-   2.1 User Interface<br>
-   2.2 Plan Selection<br>
-   2.3 Phone Number Validation<br>
-   2.4 SIM Card Handling<br>
-   2.5 Billing Information<br>
-   2.6 Payment Processing<br>
-   2.7 Confirmation<br>
-   2.8 Plan Activation<br>
-   2.9 Error Handling<br>
-   2.10 Testing<br>
+- [ ] [BackEnd Docs](#task-1)
 
-3. Non-Functional Requirements<br>
-   3.1 Usability<br>
-   3.2 Performance<br>
-   3.3 Security<br>
-   3.4 Reliability<br>
+- [ ] [FrontEnd Docs](#task-2)
 
-4. System Architecture<br>
-   4.1 Frontend (Angular)<br>
-   4.2 Backend (Spring Boot)<br>
-   4.3 Database (MySQL)<br>
+- [x] [Database Layer](https://github.com/GauravHajare45/Peudo-Fullfilling-System/blob/main/MICROSERVICES-DB%20ER-DIAGRAM/MICROSERVICES-DB-ER-DIAGRAM.PNG)
 
-5. Data Flow Diagram<br>
-   5.1 User Registration and Activation Flow<br>
-   5.2 Payment Processing Flow<br>
+- [x] [Backend Test Report](#task-4)
 
-6. User Interface Design<br>
-   6.1 Login/Registration Page<br>
-   6.2 Plan Selection Page<br>
-   6.3 Billing Information Page<br>
-   6.4 Confirmation Page<br>
+- [ ] [Frontend Test Report](#task-4)
 
-7. Deployment<br>
-   7.1 Deployment Environment<br>
-   7.2 Installation and Configuration<br>
-   7.3 Backup and Recovery<br>
+## Table of Contents
 
-8. Maintenance and Support<br>
-   8.1 Bug Tracking and Resolution<br>
-   8.2 Feature Updates<br>
-   8.3 User Support<br>
+1. [Introduction](#1-introduction)
+   - 1.1 [Purpose](#11-purpose)
+   - 1.2 [Scope](#12-scope)
+   - 1.3 [Technologies Used](#13-technologies-used)
+2. [System Overview](#2-system-overview)
+   - 2.1 [System Architecture](#21-system-architecture)
+   - 2.2 [User Roles](#22-user-roles)
+   - 2.3 [Use Cases](#23-use-cases)
+3. [Functional Requirements](#3-functional-requirements)
+   - 3.1 [User Interface](#31-user-interface)
+   - 3.2 [Plan Selection](#32-plan-selection)
+   - 3.3 [Phone Number Validation](#33-phone-number-validation)
+   - 3.4 [SIM Card Activation](#34-sim-card-activation)
+   - 3.5 [Billing Information](#35-billing-information)
+   - 3.6 [Payment Processing](#36-payment-processing)
+   - 3.7 [Confirmation](#37-confirmation)
+   - 3.8 [Plan Activation](#38-plan-activation)
+   - 3.9 [Error Handling](#39-error-handling)
+4. [Non-Functional Requirements](#4-non-functional-requirements)
+   - 4.1 [Performance](#41-performance)
+   - 4.2 [Security](#42-security)
+   - 4.3 [Usability](#43-usability)
+   - 4.4 [Availability](#44-availability)
+   - 4.5 [Scalability](#45-scalability)
+5. [Testing](#5-testing)
+   - 5.1 [Test Strategy](#51-test-strategy)
+   - 5.2 [Test Cases](#52-test-cases)
+6. [References](#6-references)
 
-9. Glossary<br>
+### 1. Introduction
 
----
+#### 1.1. Purpose
 
-## 1. Introduction
+The purpose of this Software to the develop the Pseudo Fulfillment System, a mobile plan change order handling system for a Telecom company. The system aims to streamline the process of activating new mobile plans for customers.
 
-### 1.1 Purpose
-The purpose of this Software Requirements Specification (SRS) document is to define the functional and non-functional requirements for the Pseudo Change Fulfillment System. This system allows Telco customers to activate new mobile plans, including selecting plans, validating phone numbers, handling SIM cards, providing billing information, processing payments, and confirming plan activations.
+#### 1.2. Scope
 
-### 1.2 Scope
-The Pseudo Fulfillment System encompasses both the frontend and backend components, serving Telco customers. It covers plan selection, payment processing, plan activation, and error handling.
+The scope of this project includes the design and development of both the frontend and backend components. It covers the creation of a user-friendly interface, plan selection, phone number validation, SIM card activation, billing information collection, payment processing, confirmation, plan activation, and error handling.
 
-### 1.3 Document Conventions
-- Use of square brackets "[ ]" indicates optional items.
-- Use of angle brackets "< >" indicates user input.
-- Use of capital letters indicates placeholders for specific values (e.g., PLAN_NAME).
+#### 1.3. Technologies Used
 
-### 1.4 Intended Audience
-The primary audience for this document includes software developers, testers, and project stakeholders involved in the development, testing, and deployment of the Mobile Plan Change Fulfillment System.
+The technologies used for this project are as follows:
 
-### 1.5 System Overview
-The system comprises a frontend developed using Angular, a backend developed using Spring Boot, and a MySQL database. It allows users to activate new mobile plans by selecting plans, validating phone numbers, handling SIM cards, providing billing information, processing payments, and confirming plan activations.
+- **Frontend Framework:** [Angular](https://angular.io)
 
----
+- **Backend Framework:** [Spring Boot](https://spring.io/)
 
-## 2. Functional Requirements
+- **Database:** [MySQL](https://www.mysql.com/)
 
-### 2.1 User Interface
-- The system must provide a user-friendly web interface for customers.
-- The interface should facilitate easy navigation and data entry.
+- **Microservices:**[Eureka Server](https://spring.io/guides/gs/service-registration-and-discovery/), [Feign Client](https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-feign.html)
 
-### 2.2 Plan Selection
-- Customers can view a list of available mobile plans.
-- Each plan should display plan name, data limits, talk time, and pricing.
-- Customers can select a plan for activation.
+### 2. System Overview
 
-### 2.3 Phone Number Validation
-- Customers must enter their existing mobile phone number.
-- The system should validate phone numbers for correct format (e.g., XXX-XXX-XXXX).
-- Ensure the phone number is not already in use for another active plan.
+#### 2.1. System Architecture
 
-### 2.4 SIM Card Handling
-- Customers can request a new SIM card if needed.
-- If the customer has a compatible SIM card, they can enter the SIM card number.
+The Pseudo Fulfillment System follows a client-server architecture, with Angular serving as the frontend client and Spring Boot as the backend server. The system communicates with a MySQL database for data storage and retrieval.
 
-### 2.5 Billing Information
-- Customers provide billing information, including name and address.
-- Select a payment method (credit card, PayPal, etc.).
+#### 2.2. User Roles
 
-### 2.6 Payment Processing
-- The system processes payments based on the selected plan and payment method.
-- Provides confirmation of payment status (success or failure).
+The system involves the following user roles:
 
-### 2.7 Confirmation
-- Upon successful payment, customers receive a confirmation email or SMS.
-- Confirmation includes details of the activated plan, billing information, and next steps.
+- Telco Customer: End-users who want to activate a new mobile plan.
 
-### 2.8 Plan Activation
-- The selected mobile plan is activated immediately upon successful payment.
-- Customers can make calls, send texts, and use data with the new plan.
+#### 2.3. Use Cases
 
-### 2.9 Error Handling
-- The system handles errors gracefully (e.g., failed payments, network issues, incorrect input data).
-- Clear error messages are provided to the customer for resolution.
+The main use cases of the system include:
 
-### 2.10 Testing
-- Comprehensive testing will be performed, including unit tests, integration tests, and user acceptance testing (UAT).
+- User logs in to recharge a plan.
+- User selects a mobile plan.
+- User enters and validates their phone number.
+- User requests a new SIM card if needed.
+- User provides billing information and selects a payment method.
+- System processes the payment and confirms the transaction.
+- User receives a confirmation email or SMS.
+- User's selected mobile plan is activated immediately upon successful payment.
+- System handles errors gracefully.
 
----
+### 3. Functional Requirements
 
-## 3. Non-Functional Requirements
+#### 3.1. User Interface
 
-### 3.1 Usability
-- The user interface must be intuitive and user-friendly.
-- Response times for user interactions should be minimal.
+The user interface should be designed to be intuitive and user-friendly, allowing customers to input the necessary information easily.
 
-### 3.2 Performance
-- The system should handle concurrent user requests efficiently.
-- Response times for payment processing should be fast.
-- Scalability should be considered for future growth.
+#### 3.2. Plan Selection
 
-### 3.3 Security
-- Customer data must be protected and stored securely.
-- Payment information must be encrypted during transmission.
-- Access controls should limit authorized user access.
+Customers should be able to choose from a list of available mobile plans, including details such as plan name, data limits, talk time, and pricing.
 
-### 3.4 Reliability
-- The system should be highly available with minimal downtime.
-- Automated backups and disaster recovery plans should be in place.
+#### 3.3. Phone Number Validation
 
----
+The system should validate customer phone numbers to ensure they are in the correct format (e.g., XXX-XXX-XXXX) and not already associated with another active plan.
 
-## 4. System Architecture
+#### 3.4. SIM Card Activation
 
-### 4.1 Frontend (Angular)
-- Angular will be used for the frontend.
-- The user interface will be responsive and accessible.
-- @angular-devkit/architect       0.1602.2
-- @angular-devkit/build-angular   16.2.2
-- @angular-devkit/core            16.2.2
-- @angular-devkit/schematics      16.2.2
-- @angular/cli                    16.2.2
-- @schematics/angular             16.2.2
-- rxjs                            7.8.1
-- typescript                      5.1.6
-- zone.js                         0.13.3
+Customers should have the option to request a new SIM card if needed or enter the SIM card number if they already have a compatible one.
 
-### 4.2 Backend (Spring Boot)
-- Spring Boot will serve as the backend.
-- It will handle user requests, plan activation, and payment processing.
-- Project- Maven
-- Language- Java
-- Spring Boot- 3.1.4
-- Java- 17
+#### 3.5. Billing Information
 
-### 4.3 Database (MySQL)
-- MySQL will be used to store customer data, plan information, and payment records.
-- Data integrity and security measures will be implemented.
+Customers must provide billing information, including their name, address, and payment method (e.g., credit card, PayPal).
 
----
+#### 3.6. Payment Processing
 
-## 5. Data Flow
+The system should process payments based on the selected plan and payment method. It should provide a clear confirmation of the payment status (success or failure).
 
-- 5.1 User Registration and Activation
-- 5.2 Payment Processing 
+#### 3.7. Confirmation
 
----
+Upon successful payment, the customer should receive a confirmation email or SMS with details of the activated plan, billing information, and next steps.
 
-## 6. User Interface Design
+#### 3.8. Plan Activation
 
-### 6.1 Login/Registration Page
-- Login/Registration Page option<br>
-- Auth 2.0 Login Option
+The selected mobile plan should be activated immediately upon successful payment, allowing the customer to make calls, send texts, and use data with the new plan.
 
-### 6.2 Plan Selection Page
-- Plan Selection Page
+#### 3.9. Error Handling
 
-### 6.3 Billing Information Page
-- Billing Information Page
+The system should handle errors gracefully, including failed payments, network issues, or incorrect input data, and provide clear error messages to the customer.
 
-### 6.4 Confirmation Page
-- Confirmation Page
+### 4. Non-Functional Requirements
 
----
+#### 4.1. Performance
 
-## 7. Deployment
+The system must perform efficiently, with quick response times, even during peak usage.
 
-### 7.1 Deployment Environment
-- The system will be deployed on a secure server infrastructure.
-- Deployment environments (development, staging, production) will be defined.
+#### 4.2. Security
 
-### 7.2 Installation and Configuration
-- Installation and configuration guides will be provided for administrators.
-- Automated deployment scripts may be used for ease of setup.
+Security measures should be in place to protect user data and payment information.
 
-### 7.3 Backup and Recovery
-- Automated backup procedures will be implemented.
-- A recovery plan will be in place in case of system failure.
+#### 4.3. Usability
 
----
+The system should be designed for ease of use, with an intuitive interface.
 
-## 8. Maintenance and Support
+#### 4.4. Availability
 
-### 8.1 Bug Tracking and Resolution
-- A bug tracking system will be used to log
- and prioritize issues.
+The system should be highly available, with minimal downtime for maintenance.
 
-### 8.2 Feature Updates
-- Future feature updates and enhancements will be planned and documented.
+#### 4.5. Scalability
 
-### 8.3 User Support
-- User support channels (e.g., helpdesk, email) will be available for customer assistance.
+The system should be scalable to accommodate a growing number of users and mobile plans.
 
----
+### 5. Testing
 
-## 9. Glossary
-- Telco: Telecommunications Company
-- SRS: Software Requirements Specification
-- UI: User Interface
-- API: Application Programming Interface
+#### 5.1. Test Strategy
 
----
+A comprehensive testing strategy will be employed, including unit tests, integration tests, and user acceptance testing, to ensure the application functions correctly.
 
+#### 5.2. Test Cases
+
+Detailed test cases will be developed to cover various scenarios, including plan selection, payment processing, error handling, and more.
+
+### 6. References
+
+1. Implementing microservices. ["Microservices Use"](https://spring.io/microservices).
