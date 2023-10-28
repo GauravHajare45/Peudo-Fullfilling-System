@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class MessageDTO {
     private String message;
+    private String orderId;
 }

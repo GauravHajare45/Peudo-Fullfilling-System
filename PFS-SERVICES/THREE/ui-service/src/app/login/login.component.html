@@ -1,14 +1,47 @@
-<div class="login-container">
-  <h2>Login</h2>
-  <div class="form-group">
-    <label for="phoneNo">Phone Number</label>
-    <input type="text" id="phoneNo" [(ngModel)]="phoneNo" name="phoneNo" required>
-  </div>
-  <div class="form-group">
-    <label for="otp">OTP</label>
-    <input type="text" id="otp" [(ngModel)]="otp" name="otp" required>
-  </div>
-  <button class="generate-button" (click)="generateOTP()">Generate OTP</button>
-  <button class="login-button" (click)="onSubmit()">Login</button>
-  <div class="error">{{ error }}</div>
-</div>
+<body>
+    <div class="forms-section">
+        <ng-toast [style]="{width:'300px'}"></ng-toast>
+        <div class="forms">
+            <div class="form-wrapper" [class.is-active]="isActive === 0">
+                <button type="button" class="switcher switcher-login" (click)="toggleActive(0)">
+                    Login
+                    <span class="underline"></span>
+                </button>
+                <form class="form form-login">
+                    <fieldset>
+                        <legend>Please, enter your phone number for login.</legend>
+                        <div class="input-block">
+                            <label for="phoneNo">Mobile Number</label>
+                            <input type="text" id="phoneNo" [(ngModel)]="phoneNo" name="phoneNo" required>
+                        </div>
+                        <button type="button" class="btn-login generate-button" (click)="generateOTP()">Get
+                            OTP</button>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="form-wrapper" [class.is-active]="isActive === 1">
+                <button type="button" class="switcher switcher-signup" (click)="toggleActive(1)">
+                    Verify
+                    <span class="underline"></span>
+                </button>
+                <form class="form form-signup">
+                    <fieldset>
+                        <legend>Please, enter your OTP for verification.</legend>
+                        <div class="input-block">
+                            <label for="otp">OTP</label>
+                            <div class="otp-input">
+                                <input type="text" id="digit1" maxlength="1" (input)="moveToNext($event, 2)" style="width: 40px; margin-right: 5px;">
+                                <input type="text" id="digit2" maxlength="1" (input)="moveToNext($event, 3)" style="width: 40px; margin-right: 5px;">
+                                <input type="text" id="digit3" maxlength="1" (input)="moveToNext($event, 4)" style="width: 40px; margin-right: 5px;">
+                                <input type="text" id="digit4" maxlength="1" (input)="moveToNext($event, 5)" style="width: 40px; margin-right: 5px;">
+                                <input type="text" id="digit5" maxlength="1" (input)="moveToNext($event, 6)" style="width: 40px; margin-right: 5px;">
+                                <input type="text" id="digit6" maxlength="1" style="width: 40px">                                
+                              </div>                              
+                        </div>
+                        <button type="submit" class="btn-signup login-button" (click)="onSubmit()">Login</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

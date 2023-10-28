@@ -15,4 +15,5 @@ public class SimCardDTO {
     private String adhaarNumber;
     private String ICCID;
     private String IMSI;
+    private String orderId;
 }

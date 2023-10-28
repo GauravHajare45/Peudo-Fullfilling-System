@@ -5,11 +5,12 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import com.pfs.simcardservice.DTO.CheckActiveNumber;
 import com.pfs.simcardservice.DTO.MessageDTO;
+import com.pfs.simcardservice.DTO.MobileNumberDTO;
 import com.pfs.simcardservice.DTO.NewSimCardRequest;
 import com.pfs.simcardservice.DTO.SimCardActivationRequest;
 import com.pfs.simcardservice.DTO.SimCardDTO;
@@ -46,6 +47,22 @@ public class SimCardService {
             return ResponseEntity.notFound().build();
         }
     }
+
+    public ResponseEntity<MobileNumberDTO> getMobileById(String orderId) {
+        Optional<SimCard> simCardOptional = simCardRepository.findByOrderId(orderId);
+        MobileNumberDTO mobileNumberDTO = new MobileNumberDTO();
+    
+        if (simCardOptional.isPresent()) {
+            SimCard simCard = simCardOptional.get();
+            System.out.println(simCard.getSimCardNumber() + "gauuuu");
+            mobileNumberDTO.setMobileNumber(simCard.getSimCardNumber());
+            return ResponseEntity.ok(mobileNumberDTO);
+        } else {
+            String errorMessage = "Mobile not found for order ID: " + orderId;
+            mobileNumberDTO.setMessage(errorMessage);
+            return ResponseEntity.ok(mobileNumberDTO);
+        }
+    }    
 
     public ResponseEntity<SimCardDTO> getSimCardDetails(CheckActiveNumber checkActiveNumber) {
         String simCardNumber = checkActiveNumber.getSimCardNumber();
@@ -93,6 +110,7 @@ public class SimCardService {
         String simCardNumber = generateNewSimCardNumber();
         String ICCID = generateICCID();
         String IMSI = generateIMSI();
+        String orderId = generateOrderId();
 
         SimCard newSimCard = new SimCard();
         newSimCard.setICCID(ICCID);
@@ -103,12 +121,14 @@ public class SimCardService {
         newSimCard.setSimCompanyName(newSimCardRequest.getSimCompanyName());
         newSimCard.setDob(newSimCardRequest.getDob());
         newSimCard.setAdhaarNumber(newSimCardRequest.getAdhaarNumber());
+        newSimCard.setOrderId(orderId);
 
         simCardRepository.save(newSimCard);
 
         MessageDTO messageDTO = new MessageDTO();
 
         messageDTO.setMessage("SIM card activated successfully.");
+        messageDTO.setOrderId(orderId);
         return ResponseEntity.ok(messageDTO);
     }
 
@@ -124,7 +144,7 @@ public class SimCardService {
         return iccid.toString();
     }
 
-    public static String generateIMSI() {
+    public String generateIMSI() {
 
         Random rand = new Random();
         StringBuilder imsi = new StringBuilder();
@@ -137,6 +157,12 @@ public class SimCardService {
         }
 
         return imsi.toString();
+    }
+
+    public String generateOrderId() {
+        Random rand = new Random();
+        int orderId = rand.nextInt(900) + 100; 
+        return String.valueOf(orderId);
     }
 
     public String generateNewSimCardNumber() {

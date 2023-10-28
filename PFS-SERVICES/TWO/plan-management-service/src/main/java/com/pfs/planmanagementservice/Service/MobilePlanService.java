@@ -1,6 +1,5 @@
 package com.pfs.planmanagementservice.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +12,6 @@ import com.pfs.planmanagementservice.DTO.CategoryDTO;
 import com.pfs.planmanagementservice.DTO.MobilePlanDTO;
 import com.pfs.planmanagementservice.DTO.PlanIdDTO;
 import com.pfs.planmanagementservice.DTO.SearchDTO;
-import com.pfs.planmanagementservice.DTO.UserDTO;
 import com.pfs.planmanagementservice.Entity.MobilePlan;
 import com.pfs.planmanagementservice.Repository.MobilePlanRepository;
 
@@ -63,6 +61,7 @@ public class MobilePlanService {
         dto.setCategory(mobilePlan.getCategory());
         dto.setValidity(mobilePlan.getValidity());
         dto.setOffers(mobilePlan.getOffers());
+        dto.setPlanName(mobilePlan.getPlanName());
         return dto;
     }
 

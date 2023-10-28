@@ -1,9 +1,30 @@
-<div class="container red topBotomBordersOut">
-    <a>HOME</a>
-    <a>ARTICLES</a>
-    <a>PORTFOLIO</a>
-    <a>ABOUT</a>
-    <a>CONTACT</a>
+<div>
+    <nav class="navbar navbar-expand-lg container red topBotomBordersOut" style="max-width: 1400px;">
+        <a class="navbar-brand exclude-topBotomBordersOut" routerLink="/">
+            <img src="/assets/images/logo.png" width="50" height="50" class="d-inline-block align-top" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ml-auto">
+            <a class="nav-item nav-link include-topBotomBordersOut" routerLink="/simcard">Get Sim</a>
+            <a class="nav-item nav-link include-topBotomBordersOut" routerLink="/activate-sim">Activate Sim</a>
+            <a class="nav-item nav-link include-topBotomBordersOut" routerLink="/mobile-plans" *ngIf="isLoggedIn()">Recharge</a>
+            <a class="nav-item nav-link include-topBotomBordersOut" routerLink="/bill" *ngIf="isLoggedIn()">Bills</a>  
+            <a class="nav-item nav-link include-topBotomBordersOut" routerLink="/login" *ngIf="!isLoggedIn()">SignIn</a>
+            <a class="nav-item nav-link include-topBotomBordersOut" routerLink="/" (click)="logout()" *ngIf="isLoggedIn()">SignOut</a>
+          </div>
+        </div>
+    </nav>
 </div>
+
+      
+    
+
+
+
+
+
 
 <router-outlet></router-outlet>

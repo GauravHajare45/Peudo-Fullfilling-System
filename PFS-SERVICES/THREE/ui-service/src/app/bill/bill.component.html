@@ -1,0 +1,12 @@
+<body>
+    <div [ngClass]="{ 'notification': true, 'active': isDetailsVisible }" (click)="toggleDetails()" class="invoiceDiv">
+        <h4 class="invoice-name">{{ isDetailsVisible ? '▼' : '►' }} Invoice Details</h4>
+      </div>
+      <div [ngClass]="{ 'invoice-details': true, 'active': isDetailsVisible }">
+        <p>Plan Price: {{ invoiceData.planPrice }}₹</p>
+        <p>Additional Charge: {{ invoiceData.additionalCharge }}₹</p>
+        <p>Total Amount: {{ invoiceData.totalAmount }}₹</p>
+        <p>Payment Method: {{ invoiceData.paymentMethod }}</p>
+      </div>
+</body>
+  

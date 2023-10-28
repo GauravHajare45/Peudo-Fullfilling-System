@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pfs.simcardservice.DTO.CheckActiveNumber;
 import com.pfs.simcardservice.DTO.MessageDTO;
+import com.pfs.simcardservice.DTO.MobileNumberDTO;
 import com.pfs.simcardservice.DTO.NewSimCardRequest;
 import com.pfs.simcardservice.DTO.SimCardActivationRequest;
 import com.pfs.simcardservice.DTO.SimCardDTO;
@@ -21,7 +22,7 @@ public class SimCardController {
     @Autowired
     private SimCardService simCardService;
 
-    @PostMapping("/simDetails")
+	@PostMapping("/simDetails")
     public ResponseEntity<SimCardDTO> getSimCardDetails(@RequestBody CheckActiveNumber checkActiveNumber){
         return simCardService.getSimCardDetails(checkActiveNumber);
     }
@@ -36,9 +37,14 @@ public class SimCardController {
         return simCardService.requestNewSimCard(newSimCardRequest);
     }
 
-    @PostMapping("checkSimActivation")
+    @PostMapping("/checkSimActivation")
     public ResponseEntity<Boolean> checkSimActivation(@RequestBody CheckActiveNumber checkActiveNumber){
         return simCardService.isSimCardActivated(checkActiveNumber);
+    }
+
+    @PostMapping("/getNumByOrdId")
+    public ResponseEntity<MobileNumberDTO> getMobileNumber(@RequestBody String orderId){
+        return simCardService.getMobileById(orderId);
     }
 }
 

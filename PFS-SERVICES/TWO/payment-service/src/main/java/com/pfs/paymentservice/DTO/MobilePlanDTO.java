@@ -9,7 +9,7 @@ public class MobilePlanDTO {
 
     private String dataLimit;
 
-    private int talkTime;
+    private String talkTime;
 
     private double pricing;
 
@@ -18,4 +18,7 @@ public class MobilePlanDTO {
     private String validity;
 
     private String offers;
+
+    private String paymentMethod;
+    private String paymentStatus;
 }

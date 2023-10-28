@@ -18,11 +18,14 @@ public class MobilePlan {
     @Column(name = "plan_id")
     private Long planId;
 
+    @Column(name = "plan_name")
+    private String planName;
+
     @Column(name = "data_limit")
     private String dataLimit;
 
     @Column(name = "talk_time")
-    private int talkTime;
+    private String talkTime;
 
     @Column(name = "pricing")
     private double pricing;

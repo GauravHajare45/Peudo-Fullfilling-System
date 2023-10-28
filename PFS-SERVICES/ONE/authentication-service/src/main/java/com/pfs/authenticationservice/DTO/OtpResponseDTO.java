@@ -1,8 +1,10 @@
 package com.pfs.authenticationservice.DTO;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class OtpResponseDTO {
     private String otp;
     private String status;

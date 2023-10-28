@@ -6,5 +6,7 @@ import com.pfs.simcardservice.Entity.SimCard;
 
 public interface SimCardRepository extends JpaRepository<SimCard, Long> {
     Optional<SimCard> findBySimCardNumber(String simCardNumber);
+
+    Optional<SimCard> findByOrderId(String orderId);
 }
 

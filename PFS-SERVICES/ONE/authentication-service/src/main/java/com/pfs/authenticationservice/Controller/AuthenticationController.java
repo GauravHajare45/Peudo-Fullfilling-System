@@ -60,6 +60,7 @@ public class AuthenticationController {
         try {
             ResponseEntity<Boolean> isValidResponse = mobileNumberValidClient.checkMobileNumberFormat(mobileNumberDTO);
             ResponseEntity<Boolean> isSimNumberActivated = simCardDetailsClient.checkSimActivation(checkActiveNumberDTO);
+        
     
             boolean isValid = isValidResponse.getBody();
             boolean isActivated = isSimNumberActivated.getBody();
@@ -102,7 +103,7 @@ public class AuthenticationController {
         return responseDTO;
     }
 
-    private String createAuthenticationToken(AuthRequest authenticationRequest) throws Exception {
+    public String createAuthenticationToken(AuthRequest authenticationRequest) throws Exception {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getPhoneNo(), ""));

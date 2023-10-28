@@ -2,9 +2,12 @@ export interface MobilePlanDTO {
     pricing: number;
     validity: string;
     dataLimit:string;
-    talkTime:number;
+    talkTime:string;
     category:string;
     offers:string;
+    planName:string;
+    paymentMethod:string;
+    paymentStatus:string;
   }
   
   export interface MobileNumberDTO {

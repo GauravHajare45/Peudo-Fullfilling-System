@@ -23,22 +23,16 @@ export class MobilePlansComponent implements OnInit{
   combinedPlans: any[] = [];
   selectedPlan: any;
 
-
-
-
-
-
-
-
-
-
   mobilePlanDTO: MobilePlanDTO = {
     pricing: 0,
     validity: '',
     dataLimit: '',
-    talkTime: 0,
+    talkTime: '',
     category:'a',
-    offers: ''
+    offers: '',
+    planName:'',
+    paymentMethod:'',
+    paymentStatus:''
   };
 
   constructor(private mobilePlanService: MobilePlanService, private authService: AuthService, private router: Router, private sharedDataService: SharedDataService) { }
@@ -46,7 +40,11 @@ export class MobilePlansComponent implements OnInit{
   ngOnInit(): void {
     this.token = this.authService.getToken() || ''; 
     console.log(this.token);
-    this.getAllPlans();
+    this.getCategoryPlans('Combo');
+  }
+
+  togglePlanDetails(plan: { showDetails: boolean; }) {
+    plan.showDetails = !plan.showDetails;
   }
 
   getAllPlans() {
@@ -54,18 +52,6 @@ export class MobilePlansComponent implements OnInit{
       this.allPlans = response;
     });
   }
-
-  // selectPlan(planId: number) {
-  //   this.mobilePlanService.selectMobilePlan(planId).subscribe((response: any) => {
-  //     this.mobilePlanDTO = response;
-  //     this.mobilePlanServe.category = this.mobilePlanDTO.category;
-  //     console.log(this.mobilePlanServe.category + "cat");
-      
-  //     console.log(this.mobilePlanDTO , "response");
-  //     this.sharedDataService.setSelectedMobilePlan(this.mobilePlanDTO);
-  //     this.router.navigate(['/payment']);
-  //   });
-  // }
 
   selectPlan(planId: number) {
     this.mobilePlanService.selectMobilePlan(planId).subscribe((response: MobilePlanDTO) => {
@@ -109,12 +95,6 @@ searchPlans(): void {
   } else {
     this.combinedPlans = this.categoryPlans;
   }
-}
-
-logout() {
-  this.authService.removeToken();
-  this.router.navigate(['/login']);
-}
-  
+} 
 
 }

@@ -2,7 +2,6 @@ package com.pfs.paymentservice.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +25,6 @@ public class PaymentController {
         MobilePlanDTO mobilePlanDTO = request.getMobilePlanDTO();
         MobileNumberDTO mobileNumberDTO = request.getMobileNumberDTO();
         PaymentResponseDTO paymentResponseDTO = request.getPaymentResponseDTO();
-        System.out.println(mobilePlanDTO + " plan");
-        System.out.println(mobileNumberDTO + " NUm");
-        System.out.println(paymentResponseDTO + " res");
         ResponseEntity<Boolean> result = paymentService.processPayment(mobilePlanDTO, mobileNumberDTO, paymentResponseDTO);
         return result;
     }

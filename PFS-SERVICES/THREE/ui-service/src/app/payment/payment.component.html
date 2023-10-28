@@ -1,28 +1,95 @@
-<div class="payment-container">
-  <h2>Make Payment</h2>
-  
-  <div class="recharge-amount">
-    <label for="amount">Recharge Amount:</label>
-    <input type="number" [(ngModel)]="rechargeAmount" id="amount" name="amount">
-  </div>
-  
-  <div class="selected-plan">
-    <h3>Selected Mobile Plan:</h3>
-    <p><strong>Pricing:</strong> {{ paymentRequestDTO.mobilePlanDTO.pricing }}</p>
-    <p><strong>Validity:</strong> {{ paymentRequestDTO.mobilePlanDTO.validity }}</p>
-    <p><strong>Data Limit:</strong> {{ paymentRequestDTO.mobilePlanDTO.dataLimit }}</p>
-    <p><strong>Talk Time:</strong> {{ paymentRequestDTO.mobilePlanDTO.talkTime }}</p>
-    <p><strong>Category:</strong> {{ paymentRequestDTO.mobilePlanDTO.category }}</p>
-    <p><strong>Offers:</strong> {{ paymentRequestDTO.mobilePlanDTO.offers }}</p>
-  </div>
-  
-  <div class="mobile-number">
-    <p><strong>SIM Card Number:</strong> {{ paymentRequestDTO.mobileNumberDTO.simCardNumber }}</p>
-  </div>
-  
-  <div class="payment-status">
-    <p><strong>Status Success:</strong> {{ paymentRequestDTO.paymentResponseDTO.success ? 'Yes' : 'No' }}</p>
-  </div>
-  
-  <button (click)="makePayment()">Make Payment</button>
+<body>
+  <ng-toast [style]="{width:'300px'}"></ng-toast>
+  <div class="payDiv">
+  <section class="payment-section">
+    <div class="container">
+      <div class="payment-wrapper">
+        <div class="payment-left">
+          <div class="payment-header">
+            <div class="payment-header-icon"><i class="ri-flashlight-fill"></i></div>
+            <div class="payment-header-title">Order Summary</div>
+            <p class="payment-header-description">Plan Details</p>
+          </div>
+          <div class="payment-content">
+            <div class="payment-body">
+              <div class="payment-plan">
+                <div class="payment-plan-info">
+                  <div class="payment-plan-info-name">Selected Plan Price</div>
+                  <div class="payment-plan-info-price">{{planPrice}}₹</div>
+                </div>
+                <a href="#" class="payment-plan-change">Change</a>
+              </div>
+              <div class="payment-summary">
+                <div class="payment-summary-item">
+                  <div class="payment-summary-name">Additional Charge</div>
+                  <div class="payment-summary-price">3₹</div>
+                </div>
+                <div class="payment-summary-divider"></div>
+                <div class="payment-summary-item payment-summary-total">
+                  <div class="payment-summary-name">Total</div>
+                  <div class="payment-summary-price">{{totalAmount}}₹</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="payment-right">
+          <h1 class="payment-title">Payment Details</h1>
+          <div class="payment-method">
+            <input type="radio" name="payment-method" id="method-1" checked>
+            <label for="method-1" class="payment-method-item">
+              <img src="/assets/images/visa.png" alt="">
+            </label>
+            <input type="radio" name="payment-method" id="method-2">
+            <label for="method-2" class="payment-method-item">
+              <img src="/assets/images/mastercard.png" alt="">
+            </label>
+            <input type="radio" name="payment-method" id="method-3">
+            <label for="method-3" class="payment-method-item">
+              <img src="/assets/images/paypal.png" alt="">
+            </label>
+            <input type="radio" name="payment-method" id="method-4">
+            <label for="method-4" class="payment-method-item">
+              <img src="/assets/images/stripe.png" alt="">
+            </label>
+          </div>
+          <div class="payment-container">
+            <h2>Make Payment</h2>
+
+            <div class="payment-method">
+              <label for="paymentMethod">Payment Method:</label>
+              <select [(ngModel)]="selectedPaymentMethod" name="paymentMethod">
+                <option value="upi">UPI</option>
+                <option value="card">Credit/Debit Card</option>
+                <option value="netbanking">Net Banking</option>
+                <option value="wallet">Wallet</option>
+              </select>
+            </div>
+
+            <div class="upi-payment" *ngIf="selectedPaymentMethod === 'upi'">
+              <label for="upiId">UPI ID:</label>
+              <input type="text" [(ngModel)]="upiId" name="upiId">
+            </div>
+
+            <div class="card-payment" *ngIf="selectedPaymentMethod === 'card'">
+              <label for="cardNumber">Card Number:</label>
+              <input type="text" [(ngModel)]="cardNumber" name="cardNumber">
+              <label for="expirationDate">Expiration Date:</label>
+              <input type="text" [(ngModel)]="expirationDate" name="expirationDate">
+              <label for="cvv">CVV:</label>
+              <input type="text" [(ngModel)]="cvv" name="cvv">
+            </div>
+
+            <div class="recharge-amount">
+              <label for="amount">Total Amount:</label>
+              <input type="number" [(ngModel)]="rechargeAmount" name="amount">
+            </div>
+
+            <button (click)="makePayment()">Make Payment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
+</body>

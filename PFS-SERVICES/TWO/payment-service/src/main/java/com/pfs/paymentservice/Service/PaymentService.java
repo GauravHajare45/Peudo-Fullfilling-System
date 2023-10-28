@@ -11,12 +11,16 @@ import com.pfs.paymentservice.DTO.MobilePlanDTO;
 import com.pfs.paymentservice.DTO.PaymentResponseDTO;
 import com.pfs.paymentservice.DTO.SimCardDTO;
 import com.pfs.paymentservice.Entity.Customer;
+import com.pfs.paymentservice.Repository.PaymentRepository;
 
 @Service
 public class PaymentService {
 
     @Autowired
     private SimCardDetailsClient simCardDetailsClient;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
     
 
     public ResponseEntity<Boolean> processPayment(MobilePlanDTO mobilePlanDTO, MobileNumberDTO mobileNumberDTO,
@@ -38,6 +42,10 @@ public class PaymentService {
             customer.setSimCardNumber(simCardDTO.getSimCardNumber());
             customer.setRechargeAmount(mobilePlanDTO.getPricing());
             customer.setValidityLeft(mobilePlanDTO.getValidity());
+            customer.setPaymentMethod(mobilePlanDTO.getPaymentMethod());
+            customer.setPaymentStatus(mobilePlanDTO.getPaymentStatus());
+
+            paymentRepository.save(customer);
 
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { GetMobileNumberDTO } from "../DTO/sim.models";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class MobilePlanService {
     };
     return this.httpClient.post(`${this.planApiUrl}/categoryPlans`, requestBody);
   }  
+
+  getMobileNumber(orderId: string): Observable<GetMobileNumberDTO> {
+    return this.httpClient.post<GetMobileNumberDTO>(`${this.simCardApiUrl}/getNumByOrdId`, orderId);
+  }
 
   selectMobilePlan(planId: number): Observable<any> {
     const requestBody = { planId: planId };
