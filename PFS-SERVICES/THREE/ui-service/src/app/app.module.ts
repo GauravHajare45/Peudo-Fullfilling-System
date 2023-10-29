@@ -12,6 +12,8 @@ import { PaymentComponent } from './payment/payment.component';
 import { NgToastModule } from 'ng-angular-popup';
 import { ActivateSimComponent } from './activate-sim/activate-sim.component';
 import { BillComponent } from './bill/bill.component';
+import { HomeComponent } from './home/home.component';
+
 
 
 
@@ -24,6 +26,7 @@ import { BillComponent } from './bill/bill.component';
     PaymentComponent,
     ActivateSimComponent,
     BillComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

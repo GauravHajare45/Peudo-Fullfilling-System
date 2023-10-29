@@ -9,6 +9,7 @@ import { SharedDataService } from '../Payment-Service/shared-data.service';
 export class BillComponent implements OnInit {
   invoiceData: any;
   isDetailsVisible: boolean = false;
+  currentDateTime: Date = new Date();
 
   constructor(private sharedDataService: SharedDataService) { }
 

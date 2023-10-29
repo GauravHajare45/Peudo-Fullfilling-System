@@ -61,23 +61,26 @@
               <select [(ngModel)]="selectedPaymentMethod" name="paymentMethod">
                 <option value="upi">UPI</option>
                 <option value="card">Credit/Debit Card</option>
-                <option value="netbanking">Net Banking</option>
-                <option value="wallet">Wallet</option>
               </select>
             </div>
 
             <div class="upi-payment" *ngIf="selectedPaymentMethod === 'upi'">
               <label for="upiId">UPI ID:</label>
-              <input type="text" [(ngModel)]="upiId" name="upiId">
+              <input type="text" [(ngModel)]="upiId" name="upiId" (input)="validateUPI()">
+              <div *ngIf="upiId && !upiId.match(upiPattern)" class="error-message">Invalid UPI ID</div>
             </div>
+            
 
             <div class="card-payment" *ngIf="selectedPaymentMethod === 'card'">
               <label for="cardNumber">Card Number:</label>
-              <input type="text" [(ngModel)]="cardNumber" name="cardNumber">
+              <input type="text" [(ngModel)]="cardNumber" name="cardNumber" (input)="validateCardNumber()">
+              <div *ngIf="cardNumber && !cardNumber.match(cardNumberPattern)" class="error-message">Invalid Card Number</div>
               <label for="expirationDate">Expiration Date:</label>
-              <input type="text" [(ngModel)]="expirationDate" name="expirationDate">
+              <input type="text" [(ngModel)]="expirationDate" name="expirationDate" (input)="validateExpirationDate()">
+              <div *ngIf="expirationDate && !expirationDate.match(expirationDatePattern)" class="error-message">Invalid Expiration Date</div>
               <label for="cvv">CVV:</label>
-              <input type="text" [(ngModel)]="cvv" name="cvv">
+              <input type="text" [(ngModel)]="cvv" name="cvv" (input)="validateCVV()">
+              <div *ngIf="cvv && !cvv.match(cvvPattern)" class="error-message">Invalid CVV</div>
             </div>
 
             <div class="recharge-amount">

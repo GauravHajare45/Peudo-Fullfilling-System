@@ -23,16 +23,13 @@ export class SharedDataService {
 
   setSelectedMobilePlan(plan: MobilePlanDTO) {
     this.selectedMobilePlan = plan;
-    console.log(this.selectedMobilePlan , "setwala");
   }
 
   generateInvoice(invoice: any) {
     this.invoiceData.next(invoice);
   }
 
-  getSelectedMobilePlan(): MobilePlanDTO {
-    console.log(this.selectedMobilePlan , "jjkjkjkjkjkjkj");
-    
+  getSelectedMobilePlan(): MobilePlanDTO {    
     return this.selectedMobilePlan;
   }
 

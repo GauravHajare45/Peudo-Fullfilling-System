@@ -1,6 +1,12 @@
 <body>
+
     <div class="wrapper">
         <div class="whole">
+            <div class="validity small-box"> 
+                <h6>Welcome {{mobileNumberDTO.simCardNumber}}!!</h6>
+                <p class="card-text custom-card-text" *ngIf="validityRemainDTO.validityRemain > 0"><strong>Plan Left:</strong> {{ validityRemainDTO.validityRemain }} Days</p>
+                <p class="card-text custom-card-text" *ngIf="validityRemainDTO.validityRemain <= 0">No Plans Active</p>
+            </div>
             <div class="sidenav">
                 <div class="category-buttons">
                     <button *ngFor="let category of ['Combo', 'Data', 'Talktime', 'No-Limit', 'Top-Up', 'Flight']"
@@ -25,10 +31,9 @@
                                 <div class="plan-details" *ngIf="plan.showDetails">
                                     <p class="card-text custom-card-text"><strong>Talktime:</strong> {{
                                         plan.talkTime }}</p>
-                                    <p class="card-text custom-card-text"><strong>Subscriptions:</strong> {{ plan.offers }}
+                                    <p class="card-text custom-card-text"><strong>Offers:</strong> {{ plan.offers }}
                                     </p>
                                 </div>
-
                                 <button class="view-details-button" (click)="togglePlanDetails(plan)">More Details</button><br>
                                 <button class="btn custom-button" (click)="selectPlan(plan.planId)">Select Plan</button>
                             </div>

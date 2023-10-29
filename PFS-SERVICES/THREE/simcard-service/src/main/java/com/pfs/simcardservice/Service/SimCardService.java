@@ -5,8 +5,9 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import com.pfs.simcardservice.DTO.CheckActiveNumber;
 import com.pfs.simcardservice.DTO.MessageDTO;
@@ -25,6 +26,9 @@ public class SimCardService {
 
     @Autowired
     private AvailableMobileNumRepo availableMobileNumRepo;
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     public ResponseEntity<MessageDTO> activateSimCard(SimCardActivationRequest activationRequest) {
         String simCardNumber = activationRequest.getSimCardNumber();
@@ -125,11 +129,35 @@ public class SimCardService {
 
         simCardRepository.save(newSimCard);
 
+        sendNewSimCardEmail(newSimCardRequest.getEmail(), newSimCard);
+
         MessageDTO messageDTO = new MessageDTO();
 
         messageDTO.setMessage("SIM card activated successfully.");
         messageDTO.setOrderId(orderId);
         return ResponseEntity.ok(messageDTO);
+    }
+
+    private void sendNewSimCardEmail(String recipientEmail, SimCard newSimCard) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(recipientEmail);
+        mailMessage.setSubject("New SIM Card Request Confirmation");
+    
+        // Compose the email content with SIM card details
+        String emailContent = "Your new SIM card request with the following details has been processed successfully:\n\n" +
+                             "Name: " + newSimCard.getName() + "\n" +
+                             "Address: " + newSimCard.getAddress() + "\n" +
+                             "SIM Company Name: " + newSimCard.getSimCompanyName() + "\n" +
+                             "Date of Birth: " + newSimCard.getDob() + "\n" +
+                             "Adhaar Number: " + newSimCard.getAdhaarNumber() + "\n" +
+                             "SIM Card Number: " + newSimCard.getSimCardNumber() + "\n" +
+                             "ICCID: " + newSimCard.getICCID() + "\n" +
+                             "IMSI: " + newSimCard.getIMSI() + "\n" +
+                             "Order ID: " + newSimCard.getOrderId();
+    
+        mailMessage.setText(emailContent);
+    
+        javaMailSender.send(mailMessage);
     }
 
     public static String generateICCID() {

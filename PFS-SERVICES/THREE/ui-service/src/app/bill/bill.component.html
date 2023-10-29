@@ -1,12 +1,17 @@
 <body>
-    <div [ngClass]="{ 'notification': true, 'active': isDetailsVisible }" (click)="toggleDetails()" class="invoiceDiv">
-        <h4 class="invoice-name">{{ isDetailsVisible ? '▼' : '►' }} Invoice Details</h4>
-      </div>
-      <div [ngClass]="{ 'invoice-details': true, 'active': isDetailsVisible }">
-        <p>Plan Price: {{ invoiceData.planPrice }}₹</p>
-        <p>Additional Charge: {{ invoiceData.additionalCharge }}₹</p>
-        <p>Total Amount: {{ invoiceData.totalAmount }}₹</p>
-        <p>Payment Method: {{ invoiceData.paymentMethod }}</p>
-      </div>
+  <div [ngClass]="{ 'notification': true, 'active': isDetailsVisible }" (click)="toggleDetails()" class="invoiceDiv">
+    <h4 class="invoice-name">{{ isDetailsVisible ? '▼' : '►' }} Invoice Details</h4>
+  </div>
+  <div [ngClass]="{ 'invoice-details': true, 'active': isDetailsVisible }">
+    <div class="invoice-header">
+      <p><b>Invoice Date: </b>{{ currentDateTime | date: 'short' }}</p>
+    </div>
+    <div class="invoice-body">
+      <p><b>Plan Name:</b> {{ invoiceData.planName }}</p>
+      <p><b>Plan Price:</b> ₹{{ invoiceData.planPrice }}</p>
+      <p><b>Additional Charge:</b> ₹{{ invoiceData.additionalCharge }}</p>
+      <p><b>Total Amount:</b> ₹{{ invoiceData.totalAmount }}</p>
+      <p><b>Payment Method:</b> {{ invoiceData.paymentMethod | uppercase }}</p>
+    </div>
+  </div>
 </body>
-  

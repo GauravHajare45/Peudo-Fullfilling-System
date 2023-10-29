@@ -24,23 +24,33 @@ export class SimcardComponent {
     orderId: ''
   }
   orderId: string = '';
+  email: string = '';
 
   constructor(private mobilePlanService: MobilePlanService, private router: Router, private sharedDataService: SharedDataService, private toast: NgToastService) {}
 
   requestNewSimCard() {
-    this.mobilePlanService.requestNewSimCard(this.name, this.simCompanyName, this.address, this.dob, this.adhaarNumber)
-      .subscribe(
-        response => {
-          this.message = response;
-          this.sharedDataService.setCurrentStep(2);
-          this.orderId = this.message.orderId;
-          console.log(this.orderId);
-          this.showSuccess('Simcard Requested Successful');
-          setTimeout(() => {
-            this.showInfo('Order Id: ' + this.orderId);
-          }, 2000);
-        }
-      );
+    if (!this.name || !this.address || !this.dob || !this.email) {
+      this.showInfo('Please fill in all required fields.');
+    }else if (!this.adhaarNumber.match(/^\d{12}$/)) {
+      this.showInfo('Aadhaar Number should be 12 digits.');
+    } else {
+      this.mobilePlanService.requestNewSimCard(this.name, this.simCompanyName, this.address, this.dob, this.adhaarNumber, this.email)
+        .subscribe(
+          response => {
+            this.message = response;
+            this.sharedDataService.setCurrentStep(2);
+            this.orderId = this.message.orderId;
+            console.log(this.orderId);
+            this.showSuccess('Simcard Requested Successful');
+            setTimeout(() => {
+              this.showInfo('Order Id: ' + this.orderId);
+            }, 2000);
+          },
+          error => {
+            this.showError('An error occurred while requesting the SIM card.');
+          }
+        );
+    }
   }
 
   showSuccess(message: string) {

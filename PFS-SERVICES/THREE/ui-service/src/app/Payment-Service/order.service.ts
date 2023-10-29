@@ -19,4 +19,8 @@ export class PaymentService {
   processPayment(paymentRequestDTO: PaymentRequestDTO): Observable<any> {
     return this.http.post(`${this.baseUrl}/process`, paymentRequestDTO);
   }
+
+  getValidityLeft(mobileNumberDTO: MobileNumberDTO): Observable<any>{
+    return this.http.post(`${this.baseUrl}/getRemainingValidity`, mobileNumberDTO);
+  }
 }

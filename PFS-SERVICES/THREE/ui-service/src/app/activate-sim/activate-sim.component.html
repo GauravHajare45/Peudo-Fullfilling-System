@@ -1,20 +1,20 @@
 <body>
   <ng-toast [style]="{width:'300px'}"></ng-toast>
-    <div class="track">
-      <div class="container">
-        <div class="steps">
-          <span class="circle" [class.active]="sharedDataService.currentStep == 1">1</span>
-          <span class="line"></span>
-          <span class="circle" [class.active]="sharedDataService.currentStep == 2">2</span>
-          <span class="line"></span>
-          <span class="circle" [class.active]="sharedDataService.currentStep == 3">3</span>
-          <span class="line"></span>
-          <span class="circle" [class.active]="sharedDataService.currentStep == 4">4</span>
-        </div>
+  <div class="track">
+    <div class="container">
+      <div class="steps">
+        <span class="circle" [class.active]="sharedDataService.currentStep == 1" title="Simcard Activation Initiated">1</span>
+        <span class="line"></span>
+        <span class="circle" [class.active]="sharedDataService.currentStep == 2" title="Generate Mobile Number">2</span>
+        <span class="line"></span>
+        <span class="circle" [class.active]="sharedDataService.currentStep == 3" title="Activate Mobile Number">3</span>
+        <span class="line"></span>
+        <span class="circle" [class.active]="sharedDataService.currentStep == 4" title="Simcard Activated">4</span>
       </div>
     </div>
-  
-    <div class="simcard-form-container">
+  </div>
+
+  <div class="simcard-form-container">
     <div class="simcard-form">
       <h4>Get Mobile Number</h4>
       <form (ngSubmit)="getMobileNumber(orderId)">
@@ -23,7 +23,7 @@
         <button type="submit">Get Mobile Number</button>
       </form>
     </div>
-  
+
     <div class="simcard-form">
       <h4>Activate SIM Card</h4>
       <form (ngSubmit)="activateSimCard()">
@@ -32,6 +32,5 @@
         <button type="submit">Activate SIM Card</button>
       </form>
     </div>
-</div>
-  </body>
-  
+  </div>
+</body>

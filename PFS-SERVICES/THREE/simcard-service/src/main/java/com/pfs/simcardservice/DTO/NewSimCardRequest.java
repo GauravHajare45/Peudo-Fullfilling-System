@@ -11,4 +11,5 @@ public class NewSimCardRequest {
     private String address;
     private String dob;
     private String adhaarNumber;
+    private String email;
 }

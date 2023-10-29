@@ -147,6 +147,10 @@ body {
     font-size: 13px;
   }
 
+  button:hover{
+    background-color: #1276e1;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
@@ -227,10 +231,30 @@ body {
   
   .simcard-form {
     margin-right: 100px; 
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.7);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
+
+  .custom-tooltip {
+    position: absolute;
+    background: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+    z-index: 9999;
+    top: -30px; /* Adjust the top position to position the tooltip above the circle */
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+  }
+
+  
+  
+
+  
+  
+  

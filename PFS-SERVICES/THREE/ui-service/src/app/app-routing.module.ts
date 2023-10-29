@@ -6,13 +6,15 @@ import { SimcardComponent } from './simcard/simcard.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ActivateSimComponent } from './activate-sim/activate-sim.component';
 import { BillComponent } from './bill/bill.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [{ path: 'login', component: LoginComponent },
 { path: 'mobile-plans', component: MobilePlansComponent },
 { path: 'simcard', component: SimcardComponent },
 { path: 'payment', component: PaymentComponent },
 { path: 'activate-sim', component: ActivateSimComponent },
-{ path: 'bill', component: BillComponent }
+{ path: 'bill', component: BillComponent },
+{ path: 'home', component: HomeComponent }
 ];
 
 @NgModule({

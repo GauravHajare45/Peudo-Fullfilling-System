@@ -60,6 +60,40 @@ export class PaymentComponent implements OnInit {
     this.totalAmount = this.planPrice + 3;
   }
 
+  upiPattern = /^[A-Za-z0-9._%+-]+@.*bank$/;
+  cardNumberPattern = /^[0-9]{16}$/; 
+  cvvPattern = /^[0-9]{3}$/; 
+  expirationDatePattern = /^(0[1-9]|1[0-2])\/(20[2-9][0-9]|203[0-5])$/;
+
+
+  validateUPI() {
+    console.log(this.upiId); 
+    if (this.upiId && !this.upiId.match(this.upiPattern)) {
+      console.log('Invalid UPI'); 
+    } else {
+      console.log('UPI is valid'); 
+    }
+  }
+  
+  validateCardNumber() {
+    if (this.cardNumber && !this.cardNumber.match(this.cardNumberPattern)) {
+      console.log("Invalid Card Number");
+    }
+  }
+  
+  validateCVV() {
+    if (this.cvv && !this.cvv.match(this.cvvPattern)) {
+      console.log("Invalid CVV");
+    }
+  }
+  
+  validateExpirationDate() {
+    if (this.expirationDate && !this.expirationDate.match(this.expirationDatePattern)) {
+      console.log("Invalid Expiration Date");
+    }
+  }
+  
+
   makePayment() {
 
     this.paymentRequestDTO.mobilePlanDTO = this.sharedDataService.getSelectedMobilePlan();
@@ -74,6 +108,7 @@ export class PaymentComponent implements OnInit {
     console.log("f", this.paymentRequestDTO.paymentResponseDTO);
 
     const invoice = {
+      planName: this.paymentRequestDTO.mobilePlanDTO.planName,
       planPrice: this.planPrice,
       additionalCharge: 3,
       totalAmount: this.totalAmount,
@@ -99,7 +134,7 @@ export class PaymentComponent implements OnInit {
         this.showSuccess('Payment Successful');
         setTimeout(() => {
           this.router.navigate(['/bill']);
-        }, 3000);
+        }, 2800);
       },
       (error) => {
         this.showError('Payment Failed, Incorrect Amount');

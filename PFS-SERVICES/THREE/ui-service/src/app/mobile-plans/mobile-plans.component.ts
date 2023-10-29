@@ -3,7 +3,9 @@ import { MobilePlanService } from '../Api-Service/api.service';
 import { AuthService } from '../Auth-Service/auth.service';
 import { Router } from '@angular/router';
 import { SharedDataService } from '../Payment-Service/shared-data.service';
-import { MobilePlanDTO } from '../DTO/payment.models';
+import { MobileNumberDTO, MobilePlanDTO } from '../DTO/payment.models';
+import { PaymentService } from '../Payment-Service/order.service';
+import { ValidityRemainDTO } from '../DTO/plan.models';
 
 @Component({
   selector: 'app-mobile-plans',
@@ -35,12 +37,21 @@ export class MobilePlansComponent implements OnInit{
     paymentStatus:''
   };
 
-  constructor(private mobilePlanService: MobilePlanService, private authService: AuthService, private router: Router, private sharedDataService: SharedDataService) { }
+  mobileNumberDTO: MobileNumberDTO = {
+    simCardNumber: ''
+  }
+  
+  validityRemainDTO: ValidityRemainDTO = {
+    validityRemain: 0
+  }
+
+  constructor(private mobilePlanService: MobilePlanService, private authService: AuthService, private router: Router, private sharedDataService: SharedDataService, private paymentService: PaymentService) { }
 
   ngOnInit(): void {
     this.token = this.authService.getToken() || ''; 
     console.log(this.token);
     this.getCategoryPlans('Combo');
+    this.getRemainingValidity();
   }
 
   togglePlanDetails(plan: { showDetails: boolean; }) {
@@ -96,5 +107,14 @@ searchPlans(): void {
     this.combinedPlans = this.categoryPlans;
   }
 } 
+
+getRemainingValidity(): void {
+  this.mobileNumberDTO = this.sharedDataService.getMobileNumber();
+  console.log(this.mobileNumberDTO);
+  
+  this.paymentService.getValidityLeft(this.mobileNumberDTO).subscribe((response: any) => {
+    this.validityRemainDTO = response;
+  });
+}
 
 }

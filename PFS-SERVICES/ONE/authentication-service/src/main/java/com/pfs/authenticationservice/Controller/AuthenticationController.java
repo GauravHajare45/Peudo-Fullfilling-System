@@ -54,6 +54,8 @@ public class AuthenticationController {
         MobileNumberDTO mobileNumberDTO = new MobileNumberDTO(); 
         CheckActiveNumberDTO checkActiveNumberDTO = new CheckActiveNumberDTO();
 
+        System.out.println("heyy");
+
         mobileNumberDTO.setMobileNumber(phoneNo);
         checkActiveNumberDTO.setSimCardNumber(phoneNo);
     
@@ -65,7 +67,10 @@ public class AuthenticationController {
             boolean isValid = isValidResponse.getBody();
             boolean isActivated = isSimNumberActivated.getBody();
 
+            System.out.println(isValid + " " + isActivated);
+
             if (isValid && isActivated) {
+                System.out.println("here");
                 String otp = otpService.generateOtp(phoneNo);
                 responseDTO.setOtp(otp);
                 responseDTO.setStatus("success");

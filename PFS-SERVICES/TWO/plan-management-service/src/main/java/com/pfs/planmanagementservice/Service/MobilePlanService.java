@@ -74,9 +74,6 @@ public class MobilePlanService {
             Long planId = planIdDTO.getPlanId();
             MobilePlanDTO selectedPlan = getMobilePlanById(planId);
             
-            // userDTO.setSelectedPlan(selectedPlan);
-            // userDTO.setUserNumber(userNumber);
-            
             return selectedPlan;
         } else {
             String errorMessage = "Failed to fetch the user's phone number";

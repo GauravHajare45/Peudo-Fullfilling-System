@@ -41,13 +41,14 @@ export class MobilePlanService {
     return this.httpClient.post(`${this.planApiUrl}/searchPlans`, requestBody);
   }
 
-  requestNewSimCard(name: string, simCompanyName: string, address: string, dob: string, adhaarNumber: string): Observable<any>{
+  requestNewSimCard(name: string, simCompanyName: string, address: string, dob: string, adhaarNumber: string, email: string): Observable<any>{
     const requestBody = {
       name: name,
       simCompanyName: simCompanyName,
       address: address,
       dob: dob,
-      adhaarNumber: adhaarNumber
+      adhaarNumber: adhaarNumber,
+      email: email
     }
     return this.httpClient.post(`${this.simCardApiUrl}/newSim`, requestBody);
   }
